@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/card"
 import Stepper from '@/components/Stepper'
 import Image from 'next/image'
+import MapBusBackTracking from '@/components/Maps/MapBusBackTracking'
+import LineChart from '@/components/charts/SingeLine'
 
 type Props = {
     params: {
@@ -26,8 +28,8 @@ const Bus = async ({ params }: Props) => {
     const bus: any = await getBus(params.id)
     const [totalDistance, estimatedTime] = getDistanceAndTime(bus.stops_distance_time)
 
-    return (<div className='w-full h-full pb-5'>
-        <div className='grid grid-cols-5 space-x-5 mb-5'>
+    return (<div className='w-full h-full pb-5 space-y-8'>
+        <div className='grid grid-cols-5 space-x-5'>
             <div className='h-[700px] col-span-4 relative'>
                 <Map stops={bus.stops} busPoly={bus.stops_polyline} id={params.id} />
                 <div className='absolute bottom-10 left-1/2 -translate-x-1/2 bg-primary p-2 rounded-2xl flex flex-row space-x-6 items-center'>
@@ -128,8 +130,20 @@ const Bus = async ({ params }: Props) => {
                     </Card>)}
 
                 </div>
-
-
+            </div>
+        </div>
+        <div className='flex flex-col space-y-2'>
+            <div className='w-full space-y-2'>
+                <h3 className='text-2xl font-bold '>Back Tracking</h3>
+                <div className='h-[600px] w-full relative'>
+                    <MapBusBackTracking id={bus.tracker} />
+                </div>
+            </div>
+            <div className='w-full space-y-2'>
+                <h3 className='text-2xl font-bold '>Speed Graph</h3>
+                <div className='h-[800px] w-full'>
+                    <LineChart id={bus.tracker} />
+                </div>
             </div>
         </div>
     </div>)

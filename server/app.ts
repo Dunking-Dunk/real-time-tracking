@@ -49,6 +49,8 @@ import { GetAllDriver } from './routes/driver';
 import { DeleteDriver } from './routes/driver/delete'
 
 import { getAllPoints } from './routes/point/get'
+import { GetBackTrackBus } from './routes/data/backTracking';
+import { GetSpeedTracking } from './routes/data/speedTracking';
 
 const app = express();
 
@@ -110,7 +112,8 @@ app.use(getAllPoints)
 
 
 app.use(GetQuickStats)
-
+app.use(GetBackTrackBus)
+app.use(GetSpeedTracking)
 
 
 app.use('*', async (req, res) => {

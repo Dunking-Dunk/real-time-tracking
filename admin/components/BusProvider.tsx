@@ -9,6 +9,13 @@ import { setTrackers } from "@/store/trackerReducer"
 import { setDrivers } from "@/store/driverReducer"
 import { setAnnouncements } from "@/store/announcementReducer"
 
+import {
+    Chart as ChartJS, ArcElement, Tooltip, Legend, LinearScale,
+    PointElement, LineElement, CategoryScale, BarElement,
+} from "chart.js";
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, ArcElement, Tooltip, Legend, LineElement, BarElement);
+
 const BusProvider = ({ buses, children, stops, trackers, drivers, announcements }: {
     buses: Bus[],
     stops: Stop[],

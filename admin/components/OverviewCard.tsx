@@ -7,7 +7,7 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-  } from "@/components/ui/card"
+} from "@/components/ui/card"
 
 type Props = {
     title: string;
@@ -19,10 +19,10 @@ type Props = {
 const CardOverview = ({ title, Icon, value, description }: Props) => {
     return (
         <Card className='w-full'>
-            <CardHeader className='w-full flex flex-row items-center justify-between '>
+            <CardHeader className='w-full flex flex-row items-center justify-between'>
                 <CardTitle className='text-sm font-medium'>{title}</CardTitle>
                 {Icon}
-            </CardHeader>        
+            </CardHeader>
             <CardContent>
                 <h3 className='font-bold text-4xl'>{value}</h3>
                 <CardDescription>{description}</CardDescription>

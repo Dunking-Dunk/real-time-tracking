@@ -1,21 +1,23 @@
-import mongoose,{ Schema } from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 interface PointAttrs {
     location: {
         type: string,
-        coordinate:  number[]
+        coordinate: number[]
     },
     trackerId: string
     busId?: string
+    speed?: number
 }
 
 export interface PointDoc extends mongoose.Document {
     location: {
         type: string,
-        coordinate:  number[]
+        coordinate: number[]
     },
     trackerId: string
     busId?: string
+    speed?: number
 }
 
 interface PointModel extends mongoose.Model<PointDoc> {
@@ -35,6 +37,10 @@ const pointSchema = new Schema({
             required: true
         },
     },
+    speed: {
+        type: Number,
+        default: 0
+    },
     trackerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Tracker',
@@ -46,12 +52,12 @@ const pointSchema = new Schema({
     }
 }, {
     timestamps: true,
-        toJSON: {
-            transform(doc,ret) {
-                ret.id = ret._id
-                delete ret._id
-            }
-        } 
+    toJSON: {
+        transform(doc, ret) {
+            ret.id = ret._id
+            delete ret._id
+        }
+    }
 })
 
 pointSchema.statics.build = (attrs: PointAttrs) => {
@@ -59,6 +65,6 @@ pointSchema.statics.build = (attrs: PointAttrs) => {
 }
 
 
-export const Point = mongoose.model<PointDoc,PointModel>('Point', pointSchema)
+export const Point = mongoose.model<PointDoc, PointModel>('Point', pointSchema)
 
 export default Point
